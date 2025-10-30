@@ -173,7 +173,7 @@ function AddressPageContent() {
                 setPhone(e.target.value)
               }}
               placeholder="请输入手机号"
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg   focus:ring-2 focus:ring-blue-500"
               required
             />
           </div>
@@ -207,7 +207,7 @@ function AddressPageContent() {
               {(_, selectRows, actions) => {
                 return (
                   <div
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg   focus:ring-2 focus:ring-blue-500"
                     onClick={() => actions.open()}
                   >
                     {selectRows.filter(row => row).length > 2 ? selectRows.map(row => row?.text).join(',') : '选择地区'}
@@ -226,7 +226,7 @@ function AddressPageContent() {
               onChange={(e) => setAddress(e.target.value)}
               placeholder="请输入详细地址，如街道、门牌号等"
               rows={3}
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none"
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg   focus:ring-2 focus:ring-blue-500 resize-none"
               required
             />
            
@@ -241,7 +241,7 @@ function AddressPageContent() {
               onChange={(e) => setShippingNote(e.target.value)}
               placeholder="如有特殊要求可在此备注"
               rows={2}
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none"
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg   focus:ring-2 focus:ring-blue-500 resize-none"
             />
           </div>
         </div>

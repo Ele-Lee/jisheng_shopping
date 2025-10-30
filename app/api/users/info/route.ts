@@ -11,7 +11,7 @@ export async function GET(request: NextRequest) {
 
   try {
     const result = await query(
-      'SELECT id, username, department_id, points, duty_count, phone, province, city, district, address, shipping_note FROM users WHERE id = $1',
+      'SELECT u.id, u.username, u.department_id, d.name as department_name, u.points, u.duty_count, u.phone, u.province, u.city, u.district, u.address, u.shipping_note FROM users u JOIN departments d ON u.department_id = d.id WHERE u.id = $1',
       [userId]
     )
 

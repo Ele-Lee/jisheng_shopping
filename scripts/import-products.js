@@ -62,7 +62,7 @@ async function importProducts() {
           typeof product.features === 'string' ? product.features : JSON.stringify(product.features),
           product.productCode,
           product.image,
-          100
+          product.stock || 100
         ]
       );
     }

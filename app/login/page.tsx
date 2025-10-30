@@ -73,7 +73,7 @@ export default function LoginPage() {
               type="text"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-base placeholder:text-gray-500 transition"
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 text-base placeholder:text-gray-500 transition"
               placeholder="请输入姓名"
               required
             />
@@ -84,7 +84,7 @@ export default function LoginPage() {
               <select
                 value={departmentId}
                 onChange={(e) => setDepartmentId(e.target.value)}
-                className="w-full px-4 py-3 pr-10 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-base bg-white appearance-none transition"
+                className="w-full px-4 py-3 pr-10 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 text-base bg-white appearance-none transition"
                 required
               >
                 <option value="">请选择部门</option>

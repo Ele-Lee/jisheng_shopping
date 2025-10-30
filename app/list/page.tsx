@@ -13,6 +13,7 @@ import { productsAtom, productsLoadedAtom } from '@/store/productStore'
 export default function ListPage() {
   const router = useRouter()
   const [loading, setLoading] = useState(true)
+  const [navigating, setNavigating] = useState(false)
   const [activeTab, setActiveTab] = useState(100)
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null)
   const { toasts, error: showError, removeToast } = useToast()
@@ -26,6 +27,7 @@ export default function ListPage() {
   const [productsLoaded, setProductsLoaded] = useAtom(productsLoadedAtom)
   
   const userPoints = userInfo?.points ?? 0
+  const isLeader = userInfo?.department_name === '局领导'
 
   const tabs = [100, 200, 300, 400, 500]
 
@@ -43,8 +45,8 @@ export default function ListPage() {
   }, [userId, userInfo, setUserInfo])
 
   useEffect(() => {
-    if (!productsLoaded) {
-      fetch('/api/products')
+    if (!productsLoaded && userId) {
+      fetch(`/api/products?userId=${userId}`)
         .then(res => res.json())
         .then(data => {
           setProducts(data.products || [])
@@ -132,13 +134,19 @@ export default function ListPage() {
               <span className="text-red-500 font-bold">{userPoints - totalPrice}</span>
             </div>
             <button
-              onClick={() => router.push('/orders')}
+              onClick={() => {
+                setNavigating(true)
+                router.push('/orders')
+              }}
               className="bg-green-500 text-white! px-3 py-2 rounded-lg text-sm"
             >
               订单记录
             </button>
             <button
-              onClick={() => router.push('/cart')}
+              onClick={() => {
+                setNavigating(true)
+                router.push('/cart')
+              }}
               className="relative bg-blue-500 text-white! px-3 py-2 rounded-lg text-sm"
             >
               购物车
@@ -150,8 +158,9 @@ export default function ListPage() {
             </button>
           </div>
         </div>
-        <div className="flex border-t">
-          {tabs.map(price => (
+        {isLeader && (
+          <div className="flex border-t">
+            {tabs.map(price => (
             <button
               key={price}
               onClick={() => setActiveTab(price)}
@@ -163,8 +172,9 @@ export default function ListPage() {
             >
               {price}积分
             </button>
-          ))}
-        </div>
+            ))}
+          </div>
+        )}
       </div>
       <div className="px-4 pt-4">
         {filteredProducts.length === 0 ? (
@@ -277,6 +287,15 @@ export default function ListPage() {
           onClose={() => removeToast(toast.id)}
         />
       ))}
+
+      {navigating && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-white rounded-lg p-6 flex flex-col items-center">
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500 mb-3"></div>
+            <p className="text-gray-700">加载中...</p>
+          </div>
+        </div>
+      )}
     </div>
   )
 }
