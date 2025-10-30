@@ -9,18 +9,30 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@types/pg": "^8.15.5",
+    "@vant/area-data": "^2.1.0",
+    "adm-zip": "^0.5.16",
+    "exceljs": "^4.4.0",
+    "jotai": "^2.15.0",
+    "next": "16.0.0",
+    "pg": "^8.16.3",
     "react": "19.2.0",
     "react-dom": "19.2.0",
-    "next": "16.0.0"
+    "react-hot-toast": "^2.6.0",
+    "react-vant": "^3.3.5",
+    "sharp": "^0.34.4",
+    "unzipper": "^0.12.3",
+    "xlsx": "^0.18.5",
+    "xml2js": "^0.6.2"
   },
   "devDependencies": {
-    "typescript": "^5",
+    "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
-    "@tailwindcss/postcss": "^4",
-    "tailwindcss": "^4",
     "eslint": "^9",
-    "eslint-config-next": "16.0.0"
+    "eslint-config-next": "16.0.0",
+    "tailwindcss": "^4",
+    "typescript": "^5"
   }
 }
