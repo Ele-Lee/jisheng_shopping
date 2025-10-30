@@ -27,7 +27,7 @@ export default function ListPage() {
   const [productsLoaded, setProductsLoaded] = useAtom(productsLoadedAtom)
   
   const userPoints = userInfo?.points ?? 0
-  const isLeader = userInfo?.department_name === '局领导'
+  const isLeader = userInfo?.department_id == 3
 
   const tabs = [100, 200, 300, 400, 500]
 
