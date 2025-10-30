@@ -4,7 +4,8 @@ const dataFile = process.argv[2] || 'products_100.ts';
 const { midAutumnProducts } = require(`../data/${dataFile}`);
 
 const pool = new Pool({
-  connectionString: process.env.DATABASE_URL || 'postgresql://10273610@localhost:5432/postgres',
+  // connectionString: process.env.DATABASE_URL || 'postgresql://10273610@localhost:5432/postgres',
+  connectionString: process.env.DATABASE_URL || 'postgresql://postgres:123456@8.148.207.39:5432/postgres',
 });
 
 async function importProducts() {

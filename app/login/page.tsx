@@ -60,18 +60,26 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="min-h-screen bg-white px-4 py-8">
+    <div className="min-h-screen bg-white px-4 py-12">
       <Toaster position="top-center" />
       <div className="max-w-md mx-auto">
-        <h1 className="text-2xl font-bold mb-8 text-center">登录</h1>
-        <form className="space-y-6" onSubmit={handleSubmit}>
+        <div className="text-center mb-10">
+          <div className="inline-block p-3 bg-blue-100 rounded-full mb-4">
+            <svg className="w-10 h-10 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+            </svg>
+          </div>
+          <h1 className="text-2xl font-bold mb-2 text-gray-800">情报指挥中心</h1>
+          <p className="text-gray-600">中秋国庆值班慰问选品</p>
+        </div>
+        <form className="space-y-5" onSubmit={handleSubmit}>
           <div>
             <label className="block text-sm font-medium mb-2 text-gray-700">姓名</label>
             <input
               type="text"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-base"
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-base placeholder:text-gray-500 transition"
               placeholder="请输入姓名"
               required
             />
@@ -82,7 +90,7 @@ export default function LoginPage() {
               <select
                 value={departmentId}
                 onChange={(e) => setDepartmentId(e.target.value)}
-                className="w-full px-4 py-3 pr-10 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-base bg-white appearance-none"
+                className="w-full px-4 py-3 pr-10 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-base bg-white appearance-none transition"
                 required
               >
                 <option value="">请选择部门</option>
@@ -102,7 +110,7 @@ export default function LoginPage() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full bg-blue-500 text-white! py-3 rounded-lg active:bg-blue-600 transition text-base font-medium disabled:bg-gray-400"
+            className="w-full bg-blue-600 text-white! py-3 rounded-lg active:bg-blue-700 transition-colors text-base font-medium disabled:bg-gray-400 disabled:cursor-not-allowed mt-6"
           >
             {loading ? '登录中...' : '登录'}
           </button>
