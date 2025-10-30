@@ -2,7 +2,8 @@ const { Pool } = require('pg');
 const { departments, userPointsSummary } = require('../data/duty-records.ts');
 
 const pool = new Pool({
-  connectionString: process.env.DATABASE_URL || 'postgresql://10273610@localhost:5432/postgres',
+  connectionString: process.env.DATABASE_URL || 'postgresql://postgres:123456@8.148.207.39:5432/postgres',
+  // connectionString: process.env.DATABASE_URL || 'postgresql://10273610@localhost:5432/postgres',
 });
 
 async function importData() {

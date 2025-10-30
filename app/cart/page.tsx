@@ -47,6 +47,7 @@ export default function CartPage() {
       return item
     }).filter(Boolean)
 
+    // @ts-ignore
     setCart(updatedCart)
   }
 

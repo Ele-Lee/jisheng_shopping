@@ -67,6 +67,23 @@ export default function ListPage() {
     return item ? item.quantity : 0
   }
 
+  const parseSpecification = (spec: string | null | undefined): string => {
+    if (!spec) return '暂无规格信息'
+    
+    try {
+      const parsed = JSON.parse(spec)
+      if (parsed && typeof parsed === 'object' && parsed.richText && Array.isArray(parsed.richText)) {
+        return parsed.richText
+          .map((item: any) => item.text || '')
+          .filter((text: string) => text.trim())
+          .join('\n')
+      }
+      return spec
+    } catch {
+      return spec
+    }
+  }
+
   const updateQuantity = (product: Product, delta: number) => {
     const currentQuantity = getCartQuantity(product.id)
     const newQuantity = currentQuantity + delta
@@ -74,6 +91,12 @@ export default function ListPage() {
 
     if (newQuantity <= 0) {
       setCart(cart.filter(c => c.productId !== product.id))
+      return
+    }
+
+    const newTotalPrice = totalPrice + (delta * price)
+    if (newTotalPrice > userPoints) {
+      showError('积分不足')
       return
     }
 
@@ -228,7 +251,7 @@ export default function ListPage() {
               <div className="border-t pt-3">
                 <h5 className="font-semibold text-sm mb-2">规格明细：</h5>
                 <div className="text-sm text-gray-700 whitespace-pre-wrap leading-relaxed">
-                  {selectedProduct.specification || '暂无规格信息'}
+                  {parseSpecification(selectedProduct.specification)}
                 </div>
               </div>
               {selectedProduct.features && (

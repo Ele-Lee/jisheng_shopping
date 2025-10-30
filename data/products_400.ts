@@ -1466,7 +1466,8 @@ export const midAutumnProducts = [
     "marketPrice": 938,
     "jdLink": "https://item.jd.com/10132202429634.html",
     "features": null,
-    "productCode": "2025090110253041"
+    "productCode": "2025090110253041",
+    "image": "/products_400/image_supplement_3.png"
   },
   {
     "price": 400,
@@ -1707,7 +1708,8 @@ export const midAutumnProducts = [
     "marketPrice": 658,
     "jdLink": "https://item.jd.com/10113134001517.html",
     "features": "1、拉伸折叠设计\n折叠后节省空间，提手方便移动，无需安装，即开即用。\n2、专衣专洗\n宝宝衣物/女性私物/袜子等小件衣物，省心分洗，洁净卫生。\n3、三大洗护模式\n5min快洗模式/10min慢洗模式/3min沥水模式，一键触控。\n4、波轮旋转清洗\n温和去渍同时温柔翻转衣物，洁净清洗不伤衣物。\n5、配沥水篮\n去除多余水分，减少衣物磨损和缠绕，缩短晾晒时间。",
-    "productCode": "2025090110253053"
+    "productCode": "2025090110253053",
+    "image": "/products_400/image_supplement_4.png"
   },
   {
     "price": 400,

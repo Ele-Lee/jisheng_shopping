@@ -574,7 +574,8 @@ export const midAutumnProducts = [
     "marketPrice": 137.9,
     "jdLink": "https://item.jd.com/10120040893144.html\nhttps://item.jd.com/10126979910427.html?sdx=ehi-lLxFuZiE6JnJY4VVi88psTCVCgIrsmpMsKhCZNuDPe_RLJ5e43_lrUviVmSX#crumb-wrap",
     "features": "国民粮油金龙鱼，中国奥委会官方粮油赞助商。多年来一直以绝对优势稳居小包装食用油行业第一品牌地位。",
-    "productCode": "2025090110251032"
+    "productCode": "2025090110251032",
+    "image": "/products_100/image_supplement_1.png"
   },
   {
     "price": 100,

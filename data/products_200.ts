@@ -232,7 +232,8 @@ export const midAutumnProducts = [
     },
     "jdLink": "https://item.jd.com/10133580355233.html            https://item.jd.com/10129478058683.html",
     "features": null,
-    "productCode": "2025090110252013"
+    "productCode": "2025090110252013",
+    "image": "/products_200/image_supplement_2.png"
   },
   {
     "price": 200,

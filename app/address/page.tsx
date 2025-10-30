@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useState, Suspense } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import Toast from '@/components/Toast'
 import { useToast } from '@/hooks/useToast'
@@ -10,7 +10,7 @@ import { useAtom } from 'jotai'
 import { userInfoAtom, userIdAtom } from '@/store/userStore'
 import { cartAtom } from '@/store/cartStore'
 
-export default function AddressPage() {
+function AddressPageContent() {
   const router = useRouter()
   const searchParams = useSearchParams()
   const fromCart = searchParams.get('from') === 'cart'
@@ -270,5 +270,17 @@ export default function AddressPage() {
         />
       ))}
     </div>
+  )
+}
+
+export default function AddressPage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <p className="text-gray-500">加载中...</p>
+      </div>
+    }>
+      <AddressPageContent />
+    </Suspense>
   )
 }
