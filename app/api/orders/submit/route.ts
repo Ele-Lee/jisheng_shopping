@@ -7,18 +7,25 @@ interface CartItemInput {
   price: number
 }
 
-export async function POST(request: NextRequest) {
+export async function GET(request: NextRequest) {
   try {
-    const body = await request.json()
-    const { userId, cartItems, totalPoints } = body as {
-      userId: number
-      cartItems: CartItemInput[]
-      totalPoints: number
+    const searchParams = request.nextUrl.searchParams
+    const userId = searchParams.get('userId')
+    const cartItemsStr = searchParams.get('cartItems')
+    const totalPoints = searchParams.get('totalPoints')
+
+    if (!userId || !cartItemsStr || !totalPoints) {
+      return NextResponse.json(
+        { error: 'userId, cartItems and totalPoints are required' },
+        { status: 400 }
+      )
     }
 
-    if (!userId || !cartItems || cartItems.length === 0) {
+    const cartItems = JSON.parse(cartItemsStr) as CartItemInput[]
+
+    if (cartItems.length === 0) {
       return NextResponse.json(
-        { error: 'userId and cartItems are required' },
+        { error: 'cartItems cannot be empty' },
         { status: 400 }
       )
     }
@@ -34,12 +41,12 @@ export async function POST(request: NextRequest) {
 
     const currentPoints = userResult.rows[0].points
 
-    if (currentPoints < totalPoints) {
+    if (currentPoints < parseInt(totalPoints)) {
       await query('ROLLBACK')
       return NextResponse.json({ error: '积分不足' }, { status: 400 })
     }
 
-    const newPoints = currentPoints - totalPoints
+    const newPoints = currentPoints - parseInt(totalPoints)
     await query(
       'UPDATE users SET points = $1, updated_at = CURRENT_TIMESTAMP WHERE id = $2',
       [newPoints, userId]

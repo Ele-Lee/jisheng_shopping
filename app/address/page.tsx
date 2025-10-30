@@ -70,19 +70,16 @@ function AddressPageContent() {
     setSubmitting(true)
 
     try {
-      const response = await fetch('/api/users/address', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          userId,
-          phone,
-          province,
-          city,
-          district,
-          address,
-          shippingNote
-        })
+      const params = new URLSearchParams({
+        userId: userId!,
+        phone,
+        province,
+        city,
+        district,
+        address,
+        shippingNote
       })
+      const response = await fetch(`/api/users/address?${params.toString()}`)
 
       const data = await response.json()
 
@@ -108,15 +105,12 @@ function AddressPageContent() {
           if (cartData) {
             const { cartItems, totalPoints } = JSON.parse(cartData)
 
-            const orderResponse = await fetch('/api/orders/submit', {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify({
-                userId: parseInt(userId!),
-                cartItems,
-                totalPoints
-              })
+            const orderParams = new URLSearchParams({
+              userId: userId!,
+              cartItems: JSON.stringify(cartItems),
+              totalPoints: totalPoints.toString()
             })
+            const orderResponse = await fetch(`/api/orders/submit?${orderParams.toString()}`)
 
             const orderData = await orderResponse.json()
 

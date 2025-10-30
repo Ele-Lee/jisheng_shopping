@@ -1,12 +1,17 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { query } from '@/lib/db'
 
-export async function POST(request: NextRequest) {
+export async function GET(request: NextRequest) {
+  console.log('Login GET request received')
   try {
-    const body = await request.json()
-    const { username, departmentId } = body
+    const searchParams = request.nextUrl.searchParams
+    const username = searchParams.get('username')
+    const departmentId = searchParams.get('departmentId')
+    
+    console.log('Request params:', { username, departmentId })
 
     if (!username || !departmentId) {
+      console.log('Validation failed: missing username or departmentId')
       return NextResponse.json(
         { error: '请输入姓名并选择部门' },
         { status: 400 }

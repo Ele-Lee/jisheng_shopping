@@ -92,15 +92,12 @@ export default function CartPage() {
         price: item.product.price || 100
       }))
 
-      const response = await fetch('/api/orders/submit', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ 
-          userId: parseInt(userId), 
-          cartItems, 
-          totalPoints: totalPrice
-        })
+      const params = new URLSearchParams({
+        userId: userId!,
+        cartItems: JSON.stringify(cartItems),
+        totalPoints: totalPrice.toString()
       })
+      const response = await fetch(`/api/orders/submit?${params.toString()}`)
 
       const data = await response.json()
 
