@@ -11,7 +11,7 @@ interface Department {
   name: string
 }
 
-export default function LoginPage() {
+export default function Login2Page() {
   const router = useRouter()
   const [departments, setDepartments] = useState<Department[]>([])
   const [username, setUsername] = useState('')
@@ -20,7 +20,7 @@ export default function LoginPage() {
   const setUserId = useSetAtom(userIdAtom)
 
   useEffect(() => {
-    fetch('/api/departments?description=1')
+    fetch('/api/departments?description=0')
       .then(res => res.json())
       .then(data => setDepartments(data.departments || []))
       .catch(err => console.error('Failed to fetch departments:', err))

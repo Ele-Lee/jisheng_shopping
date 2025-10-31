@@ -30,7 +30,9 @@ export async function GET(request: NextRequest) {
 
     let productsQuery = 'SELECT * FROM products'
     
-    if (departmentName !== '局领导') {
+    if (['警航支队', '综管', '一大队', '二大队', '三大队'].includes(departmentName)) {
+      productsQuery += ' WHERE stock >= 10'
+    } else if (departmentName !== '局领导') {
       productsQuery += ' WHERE stock <= 10'
     }
     

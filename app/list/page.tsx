@@ -14,7 +14,7 @@ export default function ListPage() {
   const router = useRouter()
   const [loading, setLoading] = useState(true)
   const [navigating, setNavigating] = useState(false)
-  const [activeTab, setActiveTab] = useState(100)
+  const [activeTab, setActiveTab] = useState(500)
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null)
   const { toasts, error: showError, removeToast } = useToast()
   
@@ -27,7 +27,7 @@ export default function ListPage() {
   const [productsLoaded, setProductsLoaded] = useAtom(productsLoadedAtom)
   
   const userPoints = userInfo?.points ?? 0
-  const isLeader = userInfo?.department_id == 3
+  const isLeader = ['局领导', '警航支队', '综管', '一大队', '二大队', '三大队'].includes(userInfo?.department_name ?? '')
 
   const tabs = [100, 200, 300, 400, 500]
 
@@ -60,7 +60,7 @@ export default function ListPage() {
     } else {
       setLoading(false)
     }
-  }, [productsLoaded, setProducts, setProductsLoaded])
+  }, [productsLoaded, userId, setProducts, setProductsLoaded])
 
   const filteredProducts = products.filter(p => p.price === activeTab)
 

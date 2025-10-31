@@ -13,6 +13,7 @@ export interface UserInfo {
   district?: string
   address?: string
   shipping_note?: string
+  department_name?: string
 }
 
 export const userIdAtom = atomWithStorage<string | null>('userId', null)

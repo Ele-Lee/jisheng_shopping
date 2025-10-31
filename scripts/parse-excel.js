@@ -28,8 +28,10 @@ function parseExcelFile(filePath, holiday) {
   return records;
 }
 
-const file1Path = path.join(__dirname, '../excels/中秋节值班总名单（194人).xlsx');
-const file2Path = path.join(__dirname, '../excels/国庆节值班总名单（305人）.xlsx');
+const file1Path = path.join(__dirname, '../excels/警航支队中秋国庆慰问人员名单(2)_中秋.xlsx');
+const file2Path = path.join(__dirname, '../excels/警航支队中秋国庆慰问人员名单_国庆.xlsx');
+// const file1Path = path.join(__dirname, '../excels/中秋节值班总名单（194人).xlsx');
+// const file2Path = path.join(__dirname, '../excels/国庆节值班总名单（305人）.xlsx');
 
 const midAutumnData = parseExcelFile(file1Path, '中秋节');
 const nationalDayData = parseExcelFile(file2Path, '国庆节');
@@ -37,7 +39,7 @@ const nationalDayData = parseExcelFile(file2Path, '国庆节');
 console.log(`解析完成: 中秋节 ${midAutumnData.length} 人, 国庆节 ${nationalDayData.length} 人`);
 
 const departmentMap = new Map();
-let departmentIdCounter = 1;
+let departmentIdCounter = 7;
 
 [...midAutumnData, ...nationalDayData].forEach(record => {
   const deptName = record.部门;
@@ -55,7 +57,7 @@ console.log(`统计到 ${departments.length} 个部门`);
 const midAutumnDataWithDeptId = midAutumnData.map(record => ({
   ...record,
   部门id: departmentMap.get(record.部门).id,
-  部门: undefined
+  部门: undefined,
 })).map(({ 部门, ...rest }) => rest);
 
 const nationalDayDataWithDeptId = nationalDayData.map(record => ({
@@ -116,7 +118,7 @@ export const nationalDayDutyRecords: DutyRecord[] = ${JSON.stringify(nationalDay
 export const userPointsSummary: UserPointsSummary[] = ${JSON.stringify(summaryData, null, 2)}
 `;
 
-const outputPath = path.join(__dirname, '../data/duty-records.ts');
+const outputPath = path.join(__dirname, '../data/duty-records_2.ts');
 const outputDir = path.dirname(outputPath);
 
 if (!fs.existsSync(outputDir)) {

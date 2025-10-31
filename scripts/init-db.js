@@ -2,7 +2,7 @@ const { Client } = require('pg');
 const fs = require('fs');
 const path = require('path');
 
-const connectionString = 'postgresql://postgres:123456@8.148.207.39:5432/postgres';
+const connectionString = 'postgresql://postgres:123456@localhost:5432/postgres';
 
 async function initDatabase() {
   const client = new Client({ connectionString });

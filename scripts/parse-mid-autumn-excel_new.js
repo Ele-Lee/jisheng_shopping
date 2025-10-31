@@ -4,7 +4,7 @@ const fs = require('fs');
 const path = require('path');
 const { parseStringPromise } = require('xml2js');
 
-const excelPath = 'excels/demo5.xlsx';
+const excelPath = 'excels/demo6.xlsx';
 let point = 100;
 async function parseExcel() {
   const workbook = new ExcelJS.Workbook();
