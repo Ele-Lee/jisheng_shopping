@@ -64,7 +64,7 @@ export default function Login2Page() {
             </svg>
           </div>
           <h1 className="text-2xl font-bold mb-2 text-gray-800">警航支队</h1>
-          <p className="text-gray-600">国庆、中秋节双节在岗值班慰问</p>
+          <p className="text-gray-600">中秋国庆在岗值班慰问</p>
         </div>
         <form className="space-y-5" onSubmit={handleSubmit}>
           <div>
