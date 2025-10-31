@@ -15,6 +15,7 @@ function AddressPageContent() {
   const searchParams = useSearchParams()
   const fromCart = searchParams.get('from') === 'cart'
 
+  const [recipient, setRecipient] = useState('')
   const [phone, setPhone] = useState('')
   const [province, setProvince] = useState('')
   const [city, setCity] = useState('')
@@ -39,6 +40,7 @@ function AddressPageContent() {
 
   useEffect(() => {
     if (userInfo) {
+      setRecipient(userInfo.recipient || '')
       setPhone(userInfo.phone || '')
       setProvince(userInfo.province || '')
       setCity(userInfo.city || '')
@@ -57,7 +59,7 @@ function AddressPageContent() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
 
-    if (!phone || !province || !city || !district || !address) {
+    if (!recipient || !phone || !province || !city || !district || !address) {
       showError('请填写所有必填项')
       return
     }
@@ -72,6 +74,7 @@ function AddressPageContent() {
     try {
       const params = new URLSearchParams({
         userId: userId!,
+        recipient,
         phone,
         province,
         city,
@@ -88,6 +91,7 @@ function AddressPageContent() {
         
         const updatedUserInfo = userInfo ? { 
           ...userInfo, 
+          recipient,
           phone, 
           province, 
           city, 
@@ -162,6 +166,20 @@ function AddressPageContent() {
 
       <form onSubmit={handleSubmit} className="p-4 space-y-4">
         <div className="bg-white rounded-lg p-4 space-y-4">
+          <div>
+            <label className="block text-sm font-medium mb-2">
+              收件人 <span className="text-red-500">*</span>
+            </label>
+            <input
+              type="text"
+              value={recipient}
+              onChange={(e) => setRecipient(e.target.value)}
+              placeholder="请输入收件人姓名"
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+              required
+            />
+          </div>
+
           <div>
             <label className="block text-sm font-medium mb-2">
               手机号 <span className="text-red-500">*</span>

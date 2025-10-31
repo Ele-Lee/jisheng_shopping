@@ -14,6 +14,7 @@ export interface UserInfo {
   address?: string
   shipping_note?: string
   department_name?: string
+  recipient?: string
 }
 
 export const userIdAtom = atomWithStorage<string | null>('userId', null)

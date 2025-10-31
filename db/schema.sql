@@ -12,6 +12,7 @@ CREATE TABLE users (
   department_id INTEGER REFERENCES departments(id) ON DELETE SET NULL,
   points INTEGER DEFAULT 0,
   duty_count INTEGER DEFAULT 0,
+  recipient VARCHAR(50),
   phone VARCHAR(20),
   province VARCHAR(50),
   city VARCHAR(50),

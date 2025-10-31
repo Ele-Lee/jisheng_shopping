@@ -11,6 +11,7 @@ export interface User {
   username: string
   department_id: number | null
   points: number
+  recipient?: string | null
   phone?: string | null
   province?: string | null
   city?: string | null
