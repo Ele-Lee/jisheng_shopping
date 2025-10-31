@@ -63,8 +63,8 @@ export default function Login2Page() {
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
             </svg>
           </div>
-          <h1 className="text-2xl font-bold mb-2 text-gray-800">情报指挥中心</h1>
-          <p className="text-gray-600">中秋国庆值班慰问选品</p>
+          <h1 className="text-2xl font-bold mb-2 text-gray-800">警航支队</h1>
+          <p className="text-gray-600">国庆、中秋节双节在岗值班慰问</p>
         </div>
         <form className="space-y-5" onSubmit={handleSubmit}>
           <div>
