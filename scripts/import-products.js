@@ -1,14 +1,17 @@
+require('dotenv').config({ path: '.env.local' })
 const { Pool } = require('pg');
 
 const dataFile = process.argv[2] || 'products_100.ts';
 let stock = 100;
 if (dataFile.includes('23')) {
   stock = 0
+} else if (dataFile.includes('new')) {
+  stock = 20
 }
 const { midAutumnProducts } = require(`../data/${dataFile}`);
 
 const pool = new Pool({
-  connectionString: process.env.DATABASE_URL || 'postgresql://10273610@localhost:5432/postgres',
+  connectionString: process.env.DATABASE_URL
 });
 
 async function importProducts() {
@@ -23,7 +26,7 @@ async function importProducts() {
 //     await client.query('ALTER SEQUENCE products_id_seq RESTART WITH 1');
 //     await client.query('COMMIT');
 // return
-    const priceFromFile = dataFile.match(/products_(\d+)\.ts/);
+    const priceFromFile = dataFile.replace('new_', '').match(/products_(\d+)\.ts/);
     let productPrice = priceFromFile ? parseInt(priceFromFile[1]) : 100;
     if (dataFile.includes('23')) {
       productPrice = 500
@@ -43,9 +46,13 @@ async function importProducts() {
       };
 
       const existing = await client.query(
-        'SELECT id FROM products WHERE name = $1 AND price = $2',
-        [product.name, productPrice]
+        'SELECT id FROM products WHERE name = $1 AND price = $2 AND stock = $3',
+        [product.name, productPrice, stock]
       );
+      // const existing = await client.query(
+      //   'SELECT id FROM products WHERE name = $1 AND price = $2',
+      //   [product.name, productPrice]
+      // );
 
       if (existing.rows.length === 0) {
         await client.query(

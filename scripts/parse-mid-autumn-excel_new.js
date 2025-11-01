@@ -4,16 +4,19 @@ const fs = require('fs');
 const path = require('path');
 const { parseStringPromise } = require('xml2js');
 
-const excelPath = 'excels/demo6.xlsx';
+// const excelPath = 'excels/demo6.xlsx';
+const excelPath = 'excels/情报中心--中秋国庆双节清单选品（最终）.xlsx';
 let point = 100;
 async function parseExcel() {
   const workbook = new ExcelJS.Workbook();
   await workbook.xlsx.readFile(excelPath);
   
-  const worksheet = workbook.worksheets[0];
+  const worksheet = workbook.worksheets[4];
+  console.log(worksheet.name);
+  
   point = parseInt(worksheet.name);
-  const dataFileFile = 'products_' + point + '.ts';
-  const publicDir = path.join(__dirname, '..', 'public', 'products_' + point);
+  const dataFileFile = 'products_new_' + point + '.ts';
+  const publicDir = path.join(__dirname, '..', 'public', 'products_new_' + point);
   if (!fs.existsSync(publicDir)) {
     fs.mkdirSync(publicDir, { recursive: true });
   }
@@ -39,7 +42,7 @@ async function parseExcel() {
   };
   
   headers = worksheet.getRow(1).values.slice(1);
-  // console.log('Headers:', headers);
+  console.log('Headers:', headers);
   
   
   worksheet.eachRow((row, rowNumber) => {
@@ -78,30 +81,17 @@ async function parseExcel() {
   });
   
   
-  const xlsx = require('xlsx');
-  const xlsxWorkbook = xlsx.readFile('excels/demo2.xlsx');
-  
-  if (xlsxWorkbook.Sheets && xlsxWorkbook.SheetNames.length > 0) {
-    const sheetName = xlsxWorkbook.SheetNames[0];
-    const sheet = xlsxWorkbook.Sheets[sheetName];
-    
-    // console.log('=== Sheet Data Structure ===');
-    // console.log(JSON.stringify(sheet, null, 2));
-    // console.log('=== End Sheet Data ===');
-    
-    const media = await extractImagesFromExcel(excelPath)
-    media.forEach((img) => {
-      const ext = img.extension;
-      const fileName = `${img.name}${ext}`;
-      const filePath = path.join(publicDir, fileName);
-      fs.writeFileSync(filePath, img.buffer);
-      const product = products.find(item => item.imageId === img.name);
-      if (product) {
-        product.image = `/products_${point}/${fileName}`;
-      }
-    });
-  }
-
+  const media = await extractImagesFromExcel(excelPath)
+  media.forEach((img) => {
+    const ext = img.extension;
+    const fileName = `${img.name}${ext}`;
+    const filePath = path.join(publicDir, fileName);
+    fs.writeFileSync(filePath, img.buffer);
+    const product = products.find(item => item.imageId === img.name);
+    if (product) {
+      product.image = `/products_new_${point}/${fileName}`;
+    }
+  });
   const dataDir = path.join(__dirname, '..', 'data');
   if (!fs.existsSync(dataDir)) {
     fs.mkdirSync(dataDir, { recursive: true });

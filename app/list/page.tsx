@@ -63,6 +63,7 @@ export default function ListPage() {
   }, [productsLoaded, userId, setProducts, setProductsLoaded])
 
   const filteredProducts = products.filter(p => p.price === activeTab)
+  
 
   const getCartQuantity = (productId: number) => {
     const item = cart.find(c => c.productId === productId)

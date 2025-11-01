@@ -31,14 +31,18 @@ export async function GET(request: NextRequest) {
     let productsQuery = 'SELECT * FROM products'
     
     if (['警航支队', '综管', '一大队', '二大队', '三大队'].includes(departmentName)) {
-      productsQuery += ' WHERE stock >= 10'
+      productsQuery += ' WHERE stock >= 100'
     } else if (departmentName !== '局领导') {
       productsQuery += ' WHERE stock <= 10'
+    } else if (departmentName === '局领导') {
+      productsQuery += ' WHERE stock <= 20'
     }
-    
     productsQuery += ' ORDER BY id'
 
+    console.log(productsQuery);
+    
     const result = await query(productsQuery)
+    console.log('result.rows.length', result.rows.length);
     return NextResponse.json({ products: result.rows as Product[] })
   } catch (error) {
     console.error('Error fetching products:', error)

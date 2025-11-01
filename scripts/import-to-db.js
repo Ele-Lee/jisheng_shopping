@@ -1,5 +1,8 @@
+require('dotenv').config({ path: '.env.local' })
 const { Pool } = require('pg');
 const { departments, userPointsSummary } = require('../data/duty-records_2.ts');
+
+console.log(process.env.DATABASE_URL);
 
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL
