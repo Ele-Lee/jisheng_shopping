@@ -13,6 +13,7 @@ const { midAutumnProducts } = require(`../data/${dataFile}`);
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL
 });
+console.log(process.env.DATABASE_URL);
 
 async function importProducts() {
   const client = await pool.connect();
@@ -46,14 +47,15 @@ async function importProducts() {
       };
 
       const existing = await client.query(
-        'SELECT id FROM products WHERE name = $1 AND price = $2 AND stock = $3',
+        'SELECT id,name FROM products WHERE name = $1 AND price = $2 AND stock = $3',
         [product.name, productPrice, stock]
       );
       // const existing = await client.query(
       //   'SELECT id FROM products WHERE name = $1 AND price = $2',
       //   [product.name, productPrice]
       // );
-
+      // console.log('existing', existing.rows.length,productPrice, stock);
+      // return 
       if (existing.rows.length === 0) {
         await client.query(
           `INSERT INTO products (

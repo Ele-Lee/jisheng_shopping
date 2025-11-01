@@ -233,7 +233,7 @@ export default function ListPage() {
 
       {selectedProduct && (
         <div 
-          className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4"
+          className="fixed inset-0 bg-[rgba(0,0,0,0.8)] flex items-center justify-center z-50 p-4"
           onClick={() => setSelectedProduct(null)}
         >
           <div 
@@ -265,7 +265,7 @@ export default function ListPage() {
                   {parseSpecification(selectedProduct.specification)}
                 </div>
               </div>
-              {selectedProduct.features && (
+              {/* {selectedProduct.features && (
                 <div className="border-t pt-3 mt-3">
                   <h5 className="font-semibold text-sm mb-2">产品特点：</h5>
                   <div className="text-sm text-gray-700 whitespace-pre-wrap leading-relaxed">
@@ -274,7 +274,7 @@ export default function ListPage() {
                       : JSON.stringify(selectedProduct.features)}
                   </div>
                 </div>
-              )}
+              )} */}
             </div>
           </div>
         </div>
